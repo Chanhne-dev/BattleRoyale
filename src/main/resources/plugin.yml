@@ -1,0 +1,16 @@
+name: Battle
+version: '${project.version}'
+main: com.battle.BattlePlugin
+# SỬA api-version cho khớp bản server của bạn
+api-version: '1.21'
+folia-supported: true
+description: Battle royale với vòng bo thu (Solo/Duo)
+commands:
+  battle:
+    description: Lệnh chính của Battle
+    aliases: [br]
+permissions:
+  battle.play:
+    default: true
+  battle.admin:
+    default: op

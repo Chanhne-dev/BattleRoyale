@@ -1,0 +1,59 @@
+# Battle v0.1.1
+
+# ===== Quản lý world đấu trường =====
+# LƯU Ý: Folia (kể cả bản 26.2 của bạn) KHÔNG hỗ trợ tạo world lúc chạy,
+# nên mặc định dùng world có sẵn (static) và tự khôi phục địa hình sau mỗi trận.
+world:
+  # static : dùng world có sẵn (khuyến nghị cho Folia gốc)
+  # create : tạo world mới mỗi trận (chỉ chạy trên server hỗ trợ; xem /battle world check)
+  mode: static
+  fallback-to-static: true
+  # Tên world làm đấu trường. Để TRỐNG "" = world chính (overworld). Ví dụ: world_the_end
+  static-world: ""
+  # --- chỉ dùng khi mode = create ---
+  name-prefix: battle_match_   # thư mục có tiền tố này bị XÓA khi khởi động!
+  source: generate             # generate | template
+  template: templates/arena
+  seed: 0
+  delete-after-match: true
+  unload-delay-ticks: 100
+
+# Tự khôi phục địa hình trong world có sẵn sau mỗi trận (ghi lại mọi block bị đổi)
+restore:
+  enabled: true
+  clear-entities: true   # xóa vật phẩm rơi, XP, mũi tên, TNT, falling block trong đấu trường
+
+arena:
+  center-x: 0             # tâm vòng bo và vùng spawn
+  center-z: 0
+
+mode: solo                # solo | duo
+
+match:
+  max-duration: 900
+  grace-period: 45
+  start-countdown: 30
+  full-countdown: 10
+  min-spawn-distance: 32
+  spawn-edge-margin: 20
+  spawn-attempts: 300
+
+modes:
+  solo: { min-players: 4, max-players: 20 }
+  duo:  { min-players: 4, max-players: 20 }
+
+border:
+  start-size: 400
+  warning-distance: 10
+  phases:
+    - { wait: 105, shrink: 90, size: 250, damage: 1.0 }
+    - { wait: 90,  shrink: 75, size: 140, damage: 2.0 }
+    - { wait: 60,  shrink: 60, size: 70,  damage: 3.0 }
+    - { wait: 45,  shrink: 45, size: 30,  damage: 5.0 }
+    - { wait: 30,  shrink: 60, size: 10,  damage: 8.0 }
+    - { wait: 135, shrink: 60, size: 4,   damage: 15.0 }
+
+starter-kit:
+  - STONE_SWORD:1
+  - COOKED_BEEF:8
+  - COMPASS:1
